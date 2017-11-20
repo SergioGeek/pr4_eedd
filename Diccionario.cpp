@@ -158,7 +158,10 @@ std::list < std::string > Diccionario::sacaSucesoresDe(const std::string &p) {
 
     auto pos = this->busca( p );
 
-    return this->hojas [pos].sucesores();
+    if ( pos != -1 )
+        return this->hojas [pos].sucesores();
+    else
+        throw std::string ( "La palabra no tiene sucesores porque no está en el diccionario" );
 }
 
 
