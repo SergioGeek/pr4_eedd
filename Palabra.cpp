@@ -1,4 +1,5 @@
 
+#include <queue>
 #include "Palabra.h"
 
 Palabra::Palabra () : termino ( "" ), siguientes () {}
@@ -52,15 +53,23 @@ void Palabra::nuevoSucesor( const std::string& termino ) {
 
 std::list < std::string > Palabra::sucesores() {
 
-    std::list < std::string > lstr;
+    std::list<std::string> lstr;
+    std::priority_queue < Sucesor > pqs;
+    std::list<Sucesor>::iterator it(siguientes.begin());
+    int cont = 0;
 
-    std::list < Sucesor >::iterator it = this->siguientes.begin();
+    while ( it != siguientes.end() ){
 
-    while ( it != this->siguientes.end() ){
-        lstr.push_back( (*it).getTermino() );
-        ++it;
+        pqs.push(*it);
+        it++;
     }
 
+    while ( !pqs.empty() && cont < 10 ){
+
+        lstr.push_back( pqs.top().getTermino());
+        pqs.pop();
+        ++cont;
+    }
     return lstr;
 }
 

@@ -12,12 +12,20 @@ private:
     int numOcurrencias;
 
 public:
+    bool operator<(const Sucesor &rhs) const;
+
+    bool operator>(const Sucesor &rhs) const;
+
+    bool operator<=(const Sucesor &rhs) const;
+
+    bool operator>=(const Sucesor &rhs) const;
 
     //Cosntructor
     Sucesor ();
     Sucesor ( const std::string& term );
 
     const std::string& getTermino () const;
+
 
     void incrementar ();
 
