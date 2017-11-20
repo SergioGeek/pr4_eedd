@@ -18,6 +18,8 @@ private:
 
     std::vector < Palabra > hojas;
 
+    void ordena ();
+
 
 
 public:
@@ -31,7 +33,7 @@ public:
     void insertar ( std::string &termino );
     void entrena ( const std::string& frase );
     void usacorpus ( const std::string& nom_fich_corpus );
-    ListaEnlazada < std::string > sacaSucesoresDe ( const std::string& p );
+    std::list < std::string > sacaSucesoresDe ( const std::string& p );
 
     //Destructor
     virtual ~Diccionario();

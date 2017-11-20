@@ -31,34 +31,34 @@ std::string Palabra::getPalabra () {
 void Palabra::nuevoSucesor( const std::string& termino ) {
 
     bool encontrado = false;
-    ListaEnlazada < Sucesor >::Iterador it = this->siguientes.iterador();
+    std::list < Sucesor >::iterator it = this->siguientes.begin();
 
-    while ( !it.fin() && !encontrado  ) {
+    while ( (it != this->siguientes.end()) && !encontrado  ) {
 
-        if ( it.dato().getTermino() == termino ) {
+        if ( (*it).getTermino() == termino ) {
 
-            it.dato().incrementar();
+            (*it).incrementar();
             encontrado = true;
         }
 
-        it.siguiente();
+        ++it;
     }
 
     if ( !encontrado ) {
         Sucesor s ( termino );
-        this->siguientes.insertarFin ( s );
+        this->siguientes.push_back ( s );
     }
 }
 
-ListaEnlazada < std::string > Palabra::sucesores() {
+std::list < std::string > Palabra::sucesores() {
 
-    ListaEnlazada < std::string > lstr;
+    std::list < std::string > lstr;
 
-    ListaEnlazada < Sucesor >::Iterador it = this->siguientes.iterador();
+    std::list < Sucesor >::iterator it = this->siguientes.begin();
 
-    while ( !it.fin() ){
-        lstr.insertarFin( it.dato().getTermino() );
-        it.siguiente();
+    while ( it != this->siguientes.end() ){
+        lstr.push_back( (*it).getTermino() );
+        ++it;
     }
 
     return lstr;

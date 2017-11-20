@@ -26,15 +26,11 @@ Diccionario::Diccionario( std::string ruta ): hojas( this->espacio ) {
             }
         }
 
-        //std::qsort( this->hojas.begin(), this->hojas.begin()+this->hojas.size() );
+        std::sort( this->hojas.begin(), this->hojas.end() );
 
         fe.close();
 
-        for (int i = 0; i < this->hojas.size(); ++i) {
 
-            std::cout << this->hojas[i].getPalabra() << std::endl;
-
-        }
 
     } else {
 
@@ -95,8 +91,8 @@ void Diccionario::insertar(std::string &termino) {
     if ( this->busca ( termino ) == -1 ) {
         this->hojas.push_back( p );
 
-        //if ( p < this->hojas [ this->hojas.tam() - 2] )
-        //this->hojas.ordenar ();
+        if ( p < this->hojas [ this->hojas.size() - 2] )
+            std::sort( this->hojas.begin(), this->hojas.end() );
     }
 
 }
@@ -114,7 +110,9 @@ void Diccionario::entrena ( const std::string& frase ) {
 
             pos = this->busca( palabra );
             if (  pos == -1 ) {
-                this->insertar(palabra);
+                Palabra termino ( palabra );
+                this->hojas.push_back( termino );
+                std::sort( this->hojas.begin(), this->hojas.end() );
                 pos = this->busca(palabra);
             }
             if ( predecesor != "") {
@@ -156,11 +154,12 @@ void Diccionario::usacorpus ( const std::string &nom_fich_corpus ) {
 
 }
 
-ListaEnlazada < std::string > Diccionario::sacaSucesoresDe(const std::string &p) {
+std::list < std::string > Diccionario::sacaSucesoresDe(const std::string &p) {
 
     auto pos = this->busca( p );
 
     return this->hojas [pos].sucesores();
 }
+
 
 Diccionario::~Diccionario() {}
