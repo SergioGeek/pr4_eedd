@@ -17,9 +17,7 @@ private:
     static const long int espacio = 80383;
 
     std::vector < Palabra > hojas;
-
-    void ordena ();
-
+    
 
 
 public:
